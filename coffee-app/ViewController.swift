@@ -61,6 +61,17 @@ class ViewController: UIViewController {
         return button
     }()
     
+    let locationImage: UIImageView = {
+        let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
+        let image = UIImageView(image: UIImage(systemName: "location.fill",
+                                               withConfiguration: config))
+        image.tintColor = .black
+        
+        
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,11 +91,13 @@ class ViewController: UIViewController {
         view.addSubview(exitButton)
         view.addSubview(makeOrderButton)
         view.addSubview(coffeeCollectionView)
-        
+        view.addSubview(locationImage)
         
         let layots: [NSLayoutConstraint] = [
             addressLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             addressLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            locationImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            locationImage.leftAnchor.constraint(equalTo: addressLabel.rightAnchor, constant: 5),
             coffeeCollectionView.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 50),
             coffeeCollectionView.heightAnchor.constraint(equalToConstant: 420),
             coffeeCollectionView.widthAnchor.constraint(equalToConstant: view.frame.width),

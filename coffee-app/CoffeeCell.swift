@@ -14,7 +14,6 @@ class CoffeeCell: UICollectionViewCell {
     
     let mainView: UIView = {
         let view = UIView()
-//        view.alignment = .leading
         view.backgroundColor = UIColor(red: 0.958, green: 0.958, blue: 0.958, alpha: 1)
         view.layer.cornerRadius = 20
         
@@ -24,7 +23,8 @@ class CoffeeCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 24,
+                                       weight: .bold)
         label.text = "Латте"
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,8 @@ class CoffeeCell: UICollectionViewCell {
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 14,
+                                       weight: .regular)
         
         label.text = "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток."
         
@@ -46,35 +47,54 @@ class CoffeeCell: UICollectionViewCell {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.text = "330"
+        label.text = "330₽"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let arrowImage: UIImageView = {
+        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+        let image = UIImageView.init(
+            image: UIImage(systemName: "arrow.right",
+                           withConfiguration: config))
+        image.tintColor = .black
+
+   
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         let mainWidth:CGFloat = frame.width
+        
         addSubview(mainView)
         mainView.addSubview(coffeeImage)
         mainView.addSubview(titleLabel)
         mainView.addSubview(descriptionLabel)
         mainView.addSubview(priceLabel)
+        mainView.addSubview(arrowImage)
         
-        mainView.widthAnchor.constraint(equalToConstant: frame.width).isActive = true
-        mainView.heightAnchor.constraint(equalToConstant: frame.height).isActive = true
-//        coffeeImage.widthAnchor.constraint(equalToConstant: 205).isActive = true
-        coffeeImage.heightAnchor.constraint(equalToConstant: mainWidth / 2).isActive = true
-        coffeeImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 30).isActive = true
-        coffeeImage.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20).isActive = true
-        coffeeImage.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -20).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: coffeeImage.bottomAnchor, constant: 20).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20).isActive = true
-        descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        descriptionLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20).isActive = true
-        descriptionLabel.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -20).isActive = true
-        priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
-        priceLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20).isActive = true
+        let layots: [NSLayoutConstraint] = [
+        mainView.widthAnchor.constraint(equalToConstant: frame.width),
+        mainView.heightAnchor.constraint(equalToConstant: frame.height),
+        coffeeImage.heightAnchor.constraint(equalToConstant: mainWidth / 2),
+        coffeeImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 30),
+        coffeeImage.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20),
+        coffeeImage.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -20),
+        titleLabel.topAnchor.constraint(equalTo: coffeeImage.bottomAnchor, constant: 20),
+        titleLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20),
+        descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+        descriptionLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20),
+        descriptionLabel.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -20),
+        priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+        priceLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20),
+        arrowImage.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+        arrowImage.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -20)
+        ]
+        
+        NSLayoutConstraint.activate(layots)
     }
     
     required init?(coder: NSCoder) {

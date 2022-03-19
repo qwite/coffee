@@ -8,7 +8,7 @@ class ViewController: UIViewController {
     let addressLabel: UILabel = {
         let label = UILabel()
         label.text = "Улица Пушкина д. 88"
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -49,25 +49,17 @@ class ViewController: UIViewController {
         let button = UIButton()
         
         button.setTitle("Оформить заказ", for: .normal)
- 
-//        var config = UIButton.Configuration.filled()
-//        config.baseBackgroundColor = .white
-//        config.baseForegroundColor = .black
-//        button.configuration = config
-//        button.layer.borderColor = UIColor.black.cgColor
-//        button.layer.
-//
-//        let buttonAttributes: [NSAttributedString.Key: Any] = [
-//            .font: UIFont.systemFont(ofSize: 14, weight: .bold)
-//        ]
-////        button.layer.cornerRadius = 10
-//        let buttonAttributedText = NSAttributedString(string: "Оформить заказ", attributes: buttonAttributes)
-//        button.setAttributedTitle(buttonAttributedText, for: .normal)
-//        button.layer.cornerRadius = 25
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+
+        button.layer.masksToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
     
     
     override func viewDidLoad() {
@@ -90,20 +82,18 @@ class ViewController: UIViewController {
         view.addSubview(coffeeCollectionView)
         
         
-        
         let layots: [NSLayoutConstraint] = [
             addressLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             addressLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             coffeeCollectionView.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 50),
-//            coffeeCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-//            coffeeCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
             coffeeCollectionView.heightAnchor.constraint(equalToConstant: 420),
             coffeeCollectionView.widthAnchor.constraint(equalToConstant: view.frame.width),
             exitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             exitButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             makeOrderButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            makeOrderButton.bottomAnchor.constraint(equalTo: exitButton.topAnchor, constant: -20)
-            
+            makeOrderButton.bottomAnchor.constraint(equalTo: exitButton.topAnchor, constant: -20),
+            makeOrderButton.widthAnchor.constraint(equalToConstant: 200),
+            makeOrderButton.heightAnchor.constraint(equalToConstant: 42)
             ]
         
         NSLayoutConstraint.activate(layots)

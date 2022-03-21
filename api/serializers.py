@@ -1,18 +1,15 @@
 from rest_framework import serializers
 
-from api.models import Cafe, Coffee, Order, OrderItem, CustomUser
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ('id', 'phone_number', 'first_name', 'date_joined', 'is_staff', 'is_active', 'is_superuser')
+from api.models import Cafe, Coffee, Order, OrderItem
 
 
 class CafeSerializer(serializers.ModelSerializer):
+    orders = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='order-detail')
+    coffee = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='coffee-detail')
+
     class Meta:
         model = Cafe
-        fields = ('id', 'address', 'orders', 'get_absolute_url')
+        fields = ('id', 'address', 'coffee', 'orders', 'get_absolute_url')
 
 
 class CoffeeSerializer(serializers.ModelSerializer):
@@ -22,7 +19,7 @@ class CoffeeSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    items = serializers.StringRelatedField(many=True)
+    items = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='order-item-detail')
 
     class Meta:
         model = Order
@@ -32,6 +29,4 @@ class OrderSerializer(serializers.ModelSerializer):
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = (
-            'id', 'order', 'coffee', 'size', 'quantity', 'get_cost',
-            'added')
+        fields = ('id', 'order', 'coffee', 'size', 'quantity', 'get_cost', 'added')

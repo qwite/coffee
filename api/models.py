@@ -34,7 +34,6 @@ class CustomAccountManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone_number = PhoneNumberField('Номер телефона', unique=True)
-    password = models.CharField(_("Пароль"), max_length=128)
     first_name = models.CharField('Имя', max_length=15)
     date_joined = models.DateTimeField('Дата регистрации', auto_now_add=True)
     is_staff = models.BooleanField('Администратор', default=False)
@@ -45,7 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'phone_number'
 
-    REQUIRED_FIELDS = ['password', 'first_name']
+    REQUIRED_FIELDS = ['first_name']
 
     class Meta:
         ordering = ['-date_joined']
@@ -98,7 +97,7 @@ class Coffee(models.Model):
         super(Coffee, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return f'/{self.cafe.slug}/{self.slug}'
+        return f'/{self.slug}/'
 
     def get_image(self):
         return 'http://127.0.0.1:8000/' + self.image.url
@@ -126,7 +125,7 @@ class Coffee(models.Model):
 
 
 class Order(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(CustomUser, related_name='orders', on_delete=models.CASCADE, unique=True)
     cafe = models.ForeignKey(Cafe, related_name='orders', on_delete=models.CASCADE)
     created = models.DateTimeField('Дата создания', auto_now_add=True)
     is_paid = models.BooleanField('Оплачен', default=False)

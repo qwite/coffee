@@ -2,8 +2,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+
     
     private var coffeeCollectionView = CoffeeCollectionView()
+
     
     let addressLabel: UILabel = {
         let label = UILabel()
@@ -76,8 +78,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
         
+        navigationController?.navigationBar.isHidden = true
         setupViews()
             
         
@@ -111,8 +113,19 @@ class ViewController: UIViewController {
         
         NSLayoutConstraint.activate(layots)
         
+        makeOrderButton.addTarget(self, action: #selector(handle), for: .touchUpInside)
         
+    }
+    
+    @objc func handle () {
+        showDetail()
+    }
+    
+    func showDetail () {
+        navigationController?.pushViewController(CoffeeDetailViewController(), animated: true)
     }
 
 
 }
+
+

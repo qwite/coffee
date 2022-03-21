@@ -4,6 +4,8 @@ class CoffeeCell: UICollectionViewCell {
     
     static let reuseId: String = "CoffeeCell"
     
+
+    
     let coffeeImage: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "caffelatte"))
         image.contentMode = .scaleAspectFit

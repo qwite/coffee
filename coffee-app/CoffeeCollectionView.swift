@@ -1,11 +1,14 @@
 import UIKit
 
+
+
 class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+        
     
-
-
     // MARK: - Constants
 
+    var coffeeDelegate: CoffeeCollectionViewDelegate?
+    
     private enum Constants {
         static let spacing: CGFloat = 20
         static let borderWidth: CGFloat = 0.5
@@ -17,7 +20,7 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-
+        
         super.init(frame: .zero, collectionViewLayout: layout)
         delegate = self
         dataSource = self
@@ -40,7 +43,6 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: CoffeeCell.reuseId, for: indexPath) as! CoffeeCell
-        
         
         return cell
     }
@@ -65,9 +67,8 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let rootVC = ViewController()
-        rootVC.showDetail()
-        print("HUY")
+        coffeeDelegate?.pushController(controller: CoffeeDetailViewController())
+      
     }
     
 }

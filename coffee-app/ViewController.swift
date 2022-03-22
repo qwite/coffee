@@ -79,7 +79,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        coffeeCollectionView.coffeeDelegate = self
+        
         navigationController?.navigationBar.isHidden = true
+    
         setupViews()
             
         
@@ -113,19 +116,15 @@ class ViewController: UIViewController {
         
         NSLayoutConstraint.activate(layots)
         
-        makeOrderButton.addTarget(self, action: #selector(handle), for: .touchUpInside)
-        
+    }
+}
+
+extension ViewController: CoffeeCollectionViewDelegate {
+    func pushController(controller: UIViewController) {
+        navigationController?.pushViewController(controller, animated: true)
     }
     
-    @objc func handle () {
-        showDetail()
-    }
     
-    func showDetail () {
-        navigationController?.pushViewController(CoffeeDetailViewController(), animated: true)
-    }
-
-
 }
 
 

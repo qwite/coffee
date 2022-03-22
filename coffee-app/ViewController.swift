@@ -81,6 +81,7 @@ class ViewController: UIViewController {
         
         coffeeCollectionView.coffeeDelegate = self
         
+        navigationController?.setNavigationBarHidden(true, animated: true)
         navigationController?.navigationBar.isHidden = true
     
         setupViews()

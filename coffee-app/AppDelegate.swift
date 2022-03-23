@@ -13,7 +13,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
+        
+        let titleFontAttrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
+        
+        UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.left", withConfiguration: config)
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left", withConfiguration: config)
+        UINavigationBar.appearance().tintColor = .black
+        
+        UINavigationBar.appearance().titleTextAttributes = titleFontAttrs
+        
         return true
     }
 

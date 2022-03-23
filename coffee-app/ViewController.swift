@@ -5,16 +5,6 @@ class ViewController: UIViewController {
 
     
     private var coffeeCollectionView = CoffeeCollectionView()
-
-    
-    let addressLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Улица Пушкина д. 88"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
 //    let coffeeCollectionView: UICollectionView? = {
 //        var collectionView = UICollectionView()
@@ -63,48 +53,28 @@ class ViewController: UIViewController {
         return button
     }()
     
-    let locationImage: UIImageView = {
-        let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
-        let image = UIImageView(image: UIImage(systemName: "location.fill",
-                                               withConfiguration: config))
-        image.tintColor = .black
-        
-        
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        navigationItem.backButtonTitle = ""
         coffeeCollectionView.coffeeDelegate = self
-        
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.navigationBar.isHidden = true
+    
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        navigationController?.navigationBar.isHidden = true
     
         setupViews()
-            
-        
-    
     }
-    
+        
     func setupViews() {
         
+        title = "Улица Пушкина д. 88"
         
-        view.addSubview(addressLabel)
         view.addSubview(exitButton)
         view.addSubview(makeOrderButton)
         view.addSubview(coffeeCollectionView)
-        view.addSubview(locationImage)
         
         let layots: [NSLayoutConstraint] = [
-            addressLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            addressLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            locationImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            locationImage.leftAnchor.constraint(equalTo: addressLabel.rightAnchor, constant: 5),
-            coffeeCollectionView.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 50),
+            coffeeCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             coffeeCollectionView.heightAnchor.constraint(equalToConstant: 420),
             coffeeCollectionView.widthAnchor.constraint(equalToConstant: view.frame.width),
             exitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
@@ -118,6 +88,7 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate(layots)
         
     }
+    
 }
 
 extension ViewController: CoffeeCollectionViewDelegate {

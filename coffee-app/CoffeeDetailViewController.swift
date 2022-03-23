@@ -47,27 +47,18 @@ class CoffeeDetailViewController: UIViewController {
         return label
     }()
     
-    let backButton: UIButton = {
-        let button = UIButton()
-        
-        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
-        button.setImage(UIImage(systemName: "arrow.left", withConfiguration: config), for: .normal)
-        button.tintColor = .black
-        
-        button.addTarget(self, action: #selector(popVC), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.isHidden = false
         view.backgroundColor = .white
+    
         
         setupViews()
-        
+
     }
+    
     
     @objc func popVC () {
         self.navigationController?.popViewController(animated: true)
@@ -78,15 +69,13 @@ class CoffeeDetailViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(priceLabel)
-        view.addSubview(backButton)
+        
         
         
         let layots: [NSLayoutConstraint] = [
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            backButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             coffeeImage.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             coffeeImage.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            coffeeImage.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 20),
+            coffeeImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             coffeeImage.heightAnchor.constraint(equalToConstant: view.frame.height / 2),
             titleLabel.topAnchor.constraint(equalTo: coffeeImage.bottomAnchor, constant: 20),
             titleLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),

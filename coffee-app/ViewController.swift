@@ -2,25 +2,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-
-    
     private var coffeeCollectionView = CoffeeCollectionView()
-    
-//    let coffeeCollectionView: UICollectionView? = {
-//        var collectionView = UICollectionView()
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .horizontal
-//
-//        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        collectionView.showsHorizontalScrollIndicator = false
-//        collectionView.register(CoffeeCell.self, forCellWithReuseIdentifier: "coffeeCell")
-//
-//        collectionView.backgroundColor = .gray
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        return collectionView
-//    }()
-    
     
     let exitButton: UIButton = {
         let button = UIButton()
@@ -58,9 +40,6 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.backButtonTitle = ""
         coffeeCollectionView.coffeeDelegate = self
-    
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        navigationController?.navigationBar.isHidden = true
     
         setupViews()
     }

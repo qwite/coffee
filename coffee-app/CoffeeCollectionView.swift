@@ -13,7 +13,25 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
             image: "caffelatte",
             price: 330)
         
-        return [latte]
+        var cappuccino = Coffee(
+            title: "Капучино",
+            description: "Кофейный напиток итальянской кухни на основе эспрессо с добавлением в него подогретого вспененного молока.",
+            image: "cappuccino",
+            price: 230)
+        
+        var caramelMacchiato = Coffee(
+            title: "Карамельный Маккиато",
+            description: "Пропаренное молоко в сочетании с ванильным сиропом и насыщенным эспрессо.",
+            image: "caramelmacchiato",
+            price: 400)
+        
+        var espressoMint = Coffee(
+            title: "Эспрессо-тоник с мятой",
+            description: "Холодный и бодрящий эспрессо-тоник, идеально сочетающий в себе кофе.",
+            image: "espressomint",
+            price: 300)
+        
+        return [latte, cappuccino, caramelMacchiato, espressoMint]
     }()
     
     
@@ -28,10 +46,10 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
         dataSource = self
         register(CoffeeCell.self, forCellWithReuseIdentifier: CoffeeCell.reuseId)
         
+   
         backgroundColor = .white
         isPagingEnabled = true
         showsHorizontalScrollIndicator = false
-        autoresizingMask = .flexibleWidth
         translatesAutoresizingMaskIntoConstraints = false
     }
     

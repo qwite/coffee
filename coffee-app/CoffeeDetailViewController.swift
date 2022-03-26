@@ -65,7 +65,7 @@ class CoffeeDetailViewController: UIViewController {
     
     let sizeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Размер:"
+        label.text = "Размер"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +84,7 @@ class CoffeeDetailViewController: UIViewController {
     }()
     
     let segmentControl: UISegmentedControl = {
-        let segmentControl = UISegmentedControl(items: ["S", "M", "L"])
+        let segmentControl = UISegmentedControl(items: ["Small", "Medium", "Large"])
         segmentControl.selectedSegmentIndex = 0
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentControl
@@ -112,7 +112,7 @@ class CoffeeDetailViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         view.backgroundColor = .white
         
-        countLabel.text = "Количество: \(Int(stepper.value))"
+        countLabel.text = "\(Int(stepper.value))"
         
         setupViews()
 
@@ -125,7 +125,7 @@ class CoffeeDetailViewController: UIViewController {
     
     @objc func stepperValueChanged (_ sender: UIStepper!) {
         
-        countLabel.text = "Количество: \(Int(sender.value))"
+        countLabel.text = "\(Int(sender.value))"
         print(sender.value)
 
     }
@@ -158,16 +158,16 @@ class CoffeeDetailViewController: UIViewController {
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             descriptionLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             descriptionLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            countLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            countLabel.centerXAnchor.constraint(equalTo: stepper.centerXAnchor),
             countLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             stepper.leftAnchor.constraint(equalTo: descriptionLabel.leftAnchor),
             stepper.topAnchor.constraint(equalTo: countLabel.topAnchor, constant: 30),
-            sizeLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            sizeLabel.topAnchor.constraint(equalTo: stepper.bottomAnchor, constant: 20),
-            segmentControl.topAnchor.constraint(equalTo: sizeLabel.bottomAnchor, constant: 10),
-            segmentControl.leftAnchor.constraint(equalTo: sizeLabel.leftAnchor),
+            sizeLabel.centerXAnchor.constraint(equalTo: segmentControl.centerXAnchor),
+            sizeLabel.topAnchor.constraint(equalTo: countLabel.topAnchor),
+            segmentControl.topAnchor.constraint(equalTo: stepper.topAnchor),
+            segmentControl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             priceLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            priceLabel.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 10),
+            priceLabel.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 40),
             addToOrderButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             addToOrderButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
             addToOrderButton.widthAnchor.constraint(equalToConstant: 200),

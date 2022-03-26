@@ -3,16 +3,18 @@ import UIKit
 
 
 class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        
-    
-    // MARK: - Constants
 
     var coffeeDelegate: CoffeeCollectionViewDelegate?
     
-    private enum Constants {
-        static let spacing: CGFloat = 20
-        static let borderWidth: CGFloat = 0.5
-    }
+    var coffeeItemsArray: [Coffee] = {
+        var latte = Coffee(
+            title: "Латте",
+            description: "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток.",
+            image: "caffelatte",
+            price: 330)
+        
+        return [latte]
+    }()
     
     
     init() {
@@ -38,11 +40,14 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return coffeeItemsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: CoffeeCell.reuseId, for: indexPath) as! CoffeeCell
+        
+        let coffee = coffeeItemsArray[indexPath.row]
+        cell.setup(with: coffee)
         
         return cell
     }
@@ -67,7 +72,7 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        coffeeDelegate?.pushController(controller: CoffeeDetailViewController())
+        coffeeDelegate?.pushController(controller: CoffeeDetailViewController(item: coffeeItemsArray[indexPath.row]))
       
     }
     

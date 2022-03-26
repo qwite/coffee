@@ -18,6 +18,9 @@
 		1FD07BA527E4D4D000E92A3A /* CoffeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD07BA427E4D4D000E92A3A /* CoffeeModel.swift */; };
 		1FD5934327E2662C00CED6FA /* CoffeeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD5934227E2662C00CED6FA /* CoffeeCollectionView.swift */; };
 		1FDE544027EF77C40024DC30 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE543F27EF77C40024DC30 /* OrderModel.swift */; };
+		1FDE544327EF84400024DC30 /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE544227EF84400024DC30 /* BasketViewController.swift */; };
+		1FDE544727EF84B40024DC30 /* BasketCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE544627EF84B40024DC30 /* BasketCollectionView.swift */; };
+		1FDE544A27EF85C10024DC30 /* BasketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE544927EF85C10024DC30 /* BasketCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		1FD07BA427E4D4D000E92A3A /* CoffeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeModel.swift; sourceTree = "<group>"; };
 		1FD5934227E2662C00CED6FA /* CoffeeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCollectionView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		1FDE543F27EF77C40024DC30 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		1FDE544227EF84400024DC30 /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
+		1FDE544627EF84B40024DC30 /* BasketCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketCollectionView.swift; sourceTree = "<group>"; };
+		1FDE544927EF85C10024DC30 /* BasketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 		1F2D13F027DD1D48006FECC5 /* coffee-app */ = {
 			isa = PBXGroup;
 			children = (
+				1FDE544827EF84C90024DC30 /* Cells */,
 				1FDE544127EF77D30024DC30 /* Models */,
 				1F2D13F127DD1D48006FECC5 /* AppDelegate.swift */,
 				1F2D13F327DD1D48006FECC5 /* SceneDelegate.swift */,
@@ -74,9 +81,10 @@
 				1F2D13FC27DD1D49006FECC5 /* LaunchScreen.storyboard */,
 				1F2D13FF27DD1D49006FECC5 /* Info.plist */,
 				1F2D140527DD280A006FECC5 /* UIElements.swift */,
-				1F0E8AF627DE83CB006BE458 /* CoffeeCell.swift */,
 				1FD5934227E2662C00CED6FA /* CoffeeCollectionView.swift */,
 				1F421BF527E8E47A009C2D0B /* CoffeeDetailViewController.swift */,
+				1FDE544227EF84400024DC30 /* BasketViewController.swift */,
+				1FDE544627EF84B40024DC30 /* BasketCollectionView.swift */,
 			);
 			path = "coffee-app";
 			sourceTree = "<group>";
@@ -88,6 +96,15 @@
 				1FDE543F27EF77C40024DC30 /* OrderModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1FDE544827EF84C90024DC30 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1F0E8AF627DE83CB006BE458 /* CoffeeCell.swift */,
+				1FDE544927EF85C10024DC30 /* BasketCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FDE544327EF84400024DC30 /* BasketViewController.swift in Sources */,
+				1FDE544A27EF85C10024DC30 /* BasketCell.swift in Sources */,
 				1FD07BA527E4D4D000E92A3A /* CoffeeModel.swift in Sources */,
 				1FDE544027EF77C40024DC30 /* OrderModel.swift in Sources */,
 				1FD5934327E2662C00CED6FA /* CoffeeCollectionView.swift in Sources */,
@@ -169,6 +188,7 @@
 				1F0E8AF727DE83CB006BE458 /* CoffeeCell.swift in Sources */,
 				1F2D140627DD280A006FECC5 /* UIElements.swift in Sources */,
 				1F2D13F427DD1D48006FECC5 /* SceneDelegate.swift in Sources */,
+				1FDE544727EF84B40024DC30 /* BasketCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

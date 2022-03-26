@@ -9,8 +9,20 @@ import UIKit
 
 class CoffeeDetailViewController: UIViewController {
     
+    private let item: Coffee
+    
+    init(item: Coffee) {
+        self.item = item
+        super.init(nibName: nil, bundle: nil)
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let coffeeImage: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "caffelatte"))
+        let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -20,7 +32,6 @@ class CoffeeDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30,
                                        weight: .bold)
-        label.text = "Латте"
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,8 +42,6 @@ class CoffeeDetailViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 18,
                                        weight: .regular)
         
-        label.text = "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток."
-        
         label.numberOfLines = 0
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +51,6 @@ class CoffeeDetailViewController: UIViewController {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.text = "330₽"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,7 +75,7 @@ class CoffeeDetailViewController: UIViewController {
     let stepper: UIStepper = {
         let stepper = UIStepper()
         stepper.stepValue = 1
-        stepper.maximumValue = 5
+        stepper.maximumValue = 3
         stepper.minimumValue = 1
         
         stepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
@@ -100,12 +108,11 @@ class CoffeeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        countLabel.text = "Количество: \(Int(stepper.value))"
         navigationController?.navigationBar.isHidden = false
         view.backgroundColor = .white
-    
+        
+        countLabel.text = "Количество: \(Int(stepper.value))"
         
         setupViews()
 
@@ -124,6 +131,13 @@ class CoffeeDetailViewController: UIViewController {
     }
     
     func setupViews () {
+        
+        coffeeImage.image = UIImage(named: item.image)
+        titleLabel.text = item.title
+        descriptionLabel.text = item.description
+        priceLabel.text = "\(item.price) ₽"
+        
+        
         view.addSubview(coffeeImage)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)

@@ -3,11 +3,9 @@ import UIKit
 class CoffeeCell: UICollectionViewCell {
     
     static let reuseId: String = "CoffeeCell"
-    
 
-    
     let coffeeImage: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "caffelatte"))
+        let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +25,6 @@ class CoffeeCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24,
                                        weight: .bold)
-        label.text = "Латте"
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -37,9 +34,7 @@ class CoffeeCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14,
                                        weight: .regular)
-        
-        label.text = "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток."
-        
+                
         label.numberOfLines = 0
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +44,6 @@ class CoffeeCell: UICollectionViewCell {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.text = "330₽"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -97,6 +91,13 @@ class CoffeeCell: UICollectionViewCell {
         ]
         
         NSLayoutConstraint.activate(layots)
+    }
+    
+    func setup(with coffee: Coffee) {
+        coffeeImage.image = UIImage(named: coffee.image)
+        titleLabel.text = coffee.title
+        descriptionLabel.text = coffee.description
+        priceLabel.text = "\(coffee.price) ₽"
     }
     
     required init?(coder: NSCoder) {

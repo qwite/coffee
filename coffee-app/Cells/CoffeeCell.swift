@@ -4,7 +4,7 @@ class CoffeeCell: UICollectionViewCell {
     
     static let reuseId: String = "CoffeeCell"
 
-    let coffeeImage: UIImageView = {
+    private let coffeeImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         
@@ -12,7 +12,7 @@ class CoffeeCell: UICollectionViewCell {
         return image
     }()
     
-    let mainView: UIView = {
+    private let mainView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 0.958, green: 0.958, blue: 0.958, alpha: 1)
         view.layer.cornerRadius = 20
@@ -21,7 +21,7 @@ class CoffeeCell: UICollectionViewCell {
         return view
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24,
                                        weight: .bold)
@@ -30,7 +30,7 @@ class CoffeeCell: UICollectionViewCell {
         return label
     }()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14,
                                        weight: .regular)
@@ -41,14 +41,14 @@ class CoffeeCell: UICollectionViewCell {
         return label
     }()
     
-    let priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let arrowImage: UIImageView = {
+    private let arrowImage: UIImageView = {
         let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
         let image = UIImageView.init(
             image: UIImage(systemName: "arrow.right",

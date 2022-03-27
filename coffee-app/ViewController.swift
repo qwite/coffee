@@ -4,7 +4,7 @@ class ViewController: UIViewController {
 
     private var coffeeCollectionView = CoffeeCollectionView()
     
-    let exitButton: UIButton = {
+    private let exitButton: UIButton = {
         let button = UIButton()
         button.configuration = .plain()
         
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    let makeOrderButton: UIButton = {
+    private let makeOrderButton: UIButton = {
         let button = UIButton()
         
         button.setTitle("Оформить заказ", for: .normal)
@@ -34,11 +34,12 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.backButtonTitle = ""
+        
+        
         coffeeCollectionView.coffeeDelegate = self
     
         setupViews()
@@ -47,6 +48,18 @@ class ViewController: UIViewController {
     func setupViews() {
         
         title = "Улица Пушкина д. 88"
+        
+        navigationItem.backButtonTitle = ""
+        
+        // setting titleView
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "location.fill")
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        titleLabel.text = title
+        let hStack = UIStackView(arrangedSubviews: [titleLabel, imageView])
+        hStack.spacing = 5
+        navigationItem.titleView = hStack
         
         view.addSubview(exitButton)
         view.addSubview(makeOrderButton)

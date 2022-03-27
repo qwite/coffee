@@ -6,7 +6,7 @@ class CoffeeCollectionView: UICollectionView, UICollectionViewDelegate, UICollec
 
     var coffeeDelegate: CoffeeCollectionViewDelegate?
     
-    var coffeeItemsArray: [Coffee] = {
+    private var coffeeItemsArray: [Coffee] = {
         var latte = Coffee(
             title: "Латте",
             description: "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток.",

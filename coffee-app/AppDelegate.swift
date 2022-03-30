@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  coffee-app
-//
-//  Created by Artem Lashmanov on 3/12/22.
-//
-
 import UIKit
 
 @main

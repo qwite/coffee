@@ -1,10 +1,3 @@
-//
-//  CoffeeDetailViewController.swift
-//  coffee-app
-//
-//  Created by Artem Lashmanov on 3/21/22.
-//
-
 import UIKit
 
 class CoffeeDetailViewController: UIViewController {

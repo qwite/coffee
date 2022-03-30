@@ -59,7 +59,7 @@ class CoffeeAPIList(generics.ListCreateAPIView):
     permission_classes = (IsAdminOrReadOnly,)
 
 
-class CoffeeAPIDetailView(APIView):
+class CoffeeAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Coffee.objects.all()
     serializer_class = CoffeeSerializer
     permission_classes = (IsAdminOrReadOnly,)

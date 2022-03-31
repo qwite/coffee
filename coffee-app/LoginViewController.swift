@@ -2,7 +2,6 @@ import Alamofire
 import Foundation
 
 class LoginViewController: UIViewController {
-    
     private let loginButton: UIButton = {
         let button = UIButton()
         let lineView = UIView()
@@ -28,7 +27,7 @@ class LoginViewController: UIViewController {
             .foregroundColor: UIColor.black,
             .font: UIFont.systemFont(ofSize: 12, weight: .medium)
         ]
-        
+        button.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         let buttonAttributedText = NSAttributedString(string: "Регистрация", attributes: buttonAttributes)
         button.setAttributedTitle(buttonAttributedText, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -38,8 +37,8 @@ class LoginViewController: UIViewController {
     private let phoneField: UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "Номер телефона"
+        textfield.keyboardType = .phonePad
         textfield.translatesAutoresizingMaskIntoConstraints = false
-    
         return textfield
     }()
     
@@ -47,18 +46,20 @@ class LoginViewController: UIViewController {
         let textfield = UITextField()
         textfield.isSecureTextEntry = true
         textfield.placeholder = "Пароль"
+        
         textfield.translatesAutoresizingMaskIntoConstraints = false
-    
         return textfield
     }()
     
     @objc func loginButtonPressed() {
-        
-        let network = Networking()
-        network.loginRequest(phone: phoneField.text!, password: passwordField.text!) { token, error in
+        Networking.sharedInstance.loginRequest(phone: phoneField.text!, password: passwordField.text!) { token, error in
             
             guard let token = token else {
-                return print("Some errors: \(error!)")
+                let alert = UIAlertController(title: "Error", message: "\(error!)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+                    // ok action
+                }))
+                return self.present(alert, animated: true, completion: nil)
             }
             
             UserDefaults.standard.set(token, forKey: "token")
@@ -66,6 +67,10 @@ class LoginViewController: UIViewController {
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.updateRootViewController()
             
         }
+    }
+    
+    @objc func registerButtonPressed() {
+        self.present(RegisterViewController(), animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

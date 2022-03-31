@@ -20,6 +20,7 @@
 		1F97FC6027F074470043A606 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97FC5F27F074470043A606 /* LocationViewController.swift */; };
 		1F97FC6427F079520043A606 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97FC6327F079520043A606 /* AddressCell.swift */; };
 		1FB670D227F5D6C800A58F3A /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB670D127F5D6C800A58F3A /* Networking.swift */; };
+		1FB670D427F5E71D00A58F3A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB670D327F5E71D00A58F3A /* RegisterViewController.swift */; };
 		1FD07BA527E4D4D000E92A3A /* CoffeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD07BA427E4D4D000E92A3A /* CoffeeModel.swift */; };
 		1FDE544027EF77C40024DC30 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE543F27EF77C40024DC30 /* OrderModel.swift */; };
 		1FDE544327EF84400024DC30 /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE544227EF84400024DC30 /* BasketViewController.swift */; };
@@ -44,6 +45,7 @@
 		1F97FC5F27F074470043A606 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		1F97FC6327F079520043A606 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		1FB670D127F5D6C800A58F3A /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		1FB670D327F5E71D00A58F3A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		1FD07BA427E4D4D000E92A3A /* CoffeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeModel.swift; sourceTree = "<group>"; };
 		1FDE543F27EF77C40024DC30 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		1FDE544227EF84400024DC30 /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				1FDE544227EF84400024DC30 /* BasketViewController.swift */,
 				1F97FC5F27F074470043A606 /* LocationViewController.swift */,
 				1F17611727F4CDF200C8E298 /* LoginViewController.swift */,
+				1FB670D327F5E71D00A58F3A /* RegisterViewController.swift */,
 			);
 			path = "coffee-app";
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				1F97FC6027F074470043A606 /* LocationViewController.swift in Sources */,
 				1F2D13F227DD1D48006FECC5 /* AppDelegate.swift in Sources */,
 				1F97FC6427F079520043A606 /* AddressCell.swift in Sources */,
+				1FB670D427F5E71D00A58F3A /* RegisterViewController.swift in Sources */,
 				1F0E8AF727DE83CB006BE458 /* CoffeeCell.swift in Sources */,
 				1F2D140627DD280A006FECC5 /* UIElements.swift in Sources */,
 				1F17611827F4CDF200C8E298 /* LoginViewController.swift in Sources */,

@@ -76,10 +76,9 @@ class ViewController: UIViewController {
     }
     
     func setupViews() {
-        
-        title = "Улица Пушкина д. 88"
-        
-        navigationItem.backButtonTitle = ""
+    
+        UserDefaults.standard.set(false, forKey: "isAuthenticated")
+        navigationItem.backButtonTitle = "Плошадь революции"
         
         // setting titleView
         let imageView = UIImageView()
@@ -171,5 +170,4 @@ extension ViewController: UICollectionViewDataSource {
     }
     
 }
-
 

@@ -1,5 +1,5 @@
+import Alamofire
 import Foundation
-import UIKit
 
 class LoginViewController: UIViewController {
     
@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
 
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -51,13 +52,28 @@ class LoginViewController: UIViewController {
         return textfield
     }()
     
+    @objc func loginButtonPressed() {
+        
+        let network = Networking()
+        network.loginRequest(phone: phoneField.text!, password: passwordField.text!) { token, error in
+            
+            guard let token = token else {
+                return print("Some errors: \(error!)")
+            }
+            
+            UserDefaults.standard.set(token, forKey: "token")
+            UserDefaults.standard.set(true, forKey: "isAuthenticated")
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.updateRootViewController()
+            
+        }
+    }
+    
     override func viewDidLoad() {
         view.backgroundColor = .white
         view.addSubview(phoneField)
         view.addSubview(passwordField)
         view.addSubview(loginButton)
         view.addSubview(registerButton)
-        
         NSLayoutConstraint.activate([
             phoneField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             phoneField.centerYAnchor.constraint(equalTo: view.centerYAnchor),

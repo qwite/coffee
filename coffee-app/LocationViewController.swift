@@ -5,8 +5,7 @@ class LocationViewController: UIViewController {
     private var locationCollectionView: UICollectionView! = nil
     var dataSource: UICollectionViewDiffableDataSource<Section, Address>?
     
-//    private let addressArray = ["Пушкинская д. 85", "Садовая д. 114", "Песочная набережная д. 14", "Малая д. 3"]
-    
+
     private let addressArray: [Address] = [
         Address(title: "Пушкинская д. 85"),
         Address(title: "Садовая д. 114"),

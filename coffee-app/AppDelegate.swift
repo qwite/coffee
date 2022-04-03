@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.left", withConfiguration: config)
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left", withConfiguration: config)
         UINavigationBar.appearance().tintColor = .black
-        
         UINavigationBar.appearance().titleTextAttributes = titleFontAttrs
         
         return true

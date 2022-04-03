@@ -4,32 +4,23 @@ class LocationViewController: UIViewController {
 
     private var locationCollectionView: UICollectionView! = nil
     var dataSource: UICollectionViewDiffableDataSource<Section, Address>?
-    
 
-    private let addressArray: [Address] = [
-        Address(title: "Пушкинская д. 85"),
-        Address(title: "Садовая д. 114"),
-        Address(title: "Песочная набережная д. 14"),
-        Address(title: "Малая д. 3")
-    ]
+    var delegate: CoffeeCollectionViewDelegate?
+        
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backButtonTitle = ""
+ 
         view.backgroundColor = .white
         configureCollectionView()
-        applyInitialSnapshots(with: addressArray)
+        applyInitialSnapshots()
         setupViews()
-        
-      
-                
     }
     
     func setupViews() {
-        
-        let selectedId = dataSource?.indexPath(for: Address(title: "Пушкинская д. 85"))
-        locationCollectionView.selectItem(at: selectedId, animated: false, scrollPosition: .centeredHorizontally)
-        
         view.addSubview(locationCollectionView)
         NSLayoutConstraint.activate([
             locationCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -47,12 +38,12 @@ extension LocationViewController {
     }
 }
 
-extension LocationViewController {
-    
+extension LocationViewController: UICollectionViewDelegate {
     func configureCollectionView() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
+        collectionView.delegate = self
         let registration = UICollectionView.CellRegistration<UICollectionViewListCell, Address> { cell, indexPath, address in
             var content = cell.defaultContentConfiguration()
             content.text = "\(address.title)"
@@ -74,16 +65,32 @@ extension LocationViewController {
         return layout
     }
         
-    func applyInitialSnapshots(with address: [Address]) {
+    func applyInitialSnapshots() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Address>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(address)
-        dataSource?.apply(snapshot)
+        
+        Networking.sharedInstance.getLocations { address, error in
+            guard let address = address else {
+                return print("error: \(error!)")
+            }
+            
+            DispatchQueue.main.async {
+                snapshot.appendItems(address)
+                self.dataSource?.apply(snapshot)
+            }
+        }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Networking.sharedInstance.getLocations { address, error in
+            guard let address = address else {
+                return print("error: \(error!)")
+            }
+            
+            let selectedAddress = address[indexPath.row]
+            UserDefaults.standard.set(selectedAddress.absolute_url, forKey: "defaultLocationUrl")
+            UserDefaults.standard.set(selectedAddress.title, forKey: "defaultLocation")
+        }
+    }
+    
 }
-
-
-
-
-
-

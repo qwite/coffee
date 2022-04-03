@@ -30,8 +30,21 @@ class Networking {
 
             completion(resp.first_name, nil)
         }
-        
-
+    }
+    
+    func getLocations (completion: @escaping ([Address]?, AFError?) -> Void ) -> Void {
+        var locations: [Address] = []
+        AF.request("http://localhost:8000/api/cafe/", method: .get).responseDecodable(of: [Cafe].self) { response in
+          
+            guard let resp = response.value else {
+                return completion(nil, response.error)
+            }
+            
+            resp.forEach { cafe in
+                locations.append(Address(title: cafe.address!, absolute_url: cafe.get_absolute_url!))
+            }
+            completion(locations, nil)
+        }
     }
 }
 
@@ -57,5 +70,36 @@ extension Networking {
     
     struct Token: Decodable {
         let auth_token: String
+    }
+    
+    struct Cafe: Decodable {
+        let id: Int
+        let address: String?
+        let coffee: [Coffee]?
+        let orders: [Order]?
+        let get_absolute_url: String?
+    }
+    
+    struct Coffee: Decodable {
+        let id: Int
+        let name, description: String
+        let price, cafe: Int
+        let get_absolute_url: String
+        let image: String
+        let thumbnail: String?
+    }
+    struct Order: Codable {
+        let id, user, cafe: Int
+        let items: [Item]
+        let get_total_cost: Int
+        let created: String
+        let is_paid: Bool
+    }
+    
+    struct Item: Codable {
+        let id, order, coffee: Int
+        let size: String
+        let quantity, get_cost: Int
+        let added: String
     }
 }

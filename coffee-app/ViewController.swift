@@ -66,19 +66,22 @@ class ViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         view.backgroundColor = .white
+        navigationItem.backButtonTitle = ""
         configureCollectionView()
         setupViews()
     }
     
-    @objc func makeOrder () {
-        navigationController?.pushViewController(LocationViewController(), animated: true)
+    override func viewWillAppear(_ animated: Bool) {
+        if let defaultTitle = UserDefaults.standard.string(forKey: "defaultLocation") {
+            updateTitle(title: defaultTitle)
+            print(UserDefaults.standard.string(forKey: "defaultLocationUrl"))
+        }
     }
-    
-    func setupViews() {
-    
-        UserDefaults.standard.set(false, forKey: "isAuthenticated")
-        navigationItem.backButtonTitle = "Плошадь революции"
+        
+    func updateTitle(title: String) {
+        self.title = title
         
         // setting titleView
         let imageView = UIImageView()
@@ -86,9 +89,24 @@ class ViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         titleLabel.text = title
+        
         let hStack = UIStackView(arrangedSubviews: [titleLabel, imageView])
         hStack.spacing = 5
+        
+        // target to navigation bar
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapNavBar))
+        hStack.addGestureRecognizer(tap)
+        
         navigationItem.titleView = hStack
+    }
+    
+    @objc func makeOrder () {
+        navigationController?.pushViewController(LocationViewController(), animated: true)
+    }
+    @objc func didTapNavBar() {
+        navigationController?.pushViewController(LocationViewController(), animated: true)
+    }
+    func setupViews() {
         
         view.addSubview(exitButton)
         view.addSubview(makeOrderButton)
@@ -112,6 +130,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: CoffeeCollectionViewDelegate {
+    
     func pushController(controller: UIViewController) {
         navigationController?.pushViewController(controller, animated: true)
     }

@@ -1,5 +1,7 @@
 import Foundation
 
+typealias CoffeeModel = Coffee
+
 struct Coffee {
     let title: String
     let description: String

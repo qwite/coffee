@@ -11,9 +11,9 @@ class LocationViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Выберите адрес"
         navigationItem.backButtonTitle = ""
- 
+        
         view.backgroundColor = .white
         configureCollectionView()
         applyInitialSnapshots()

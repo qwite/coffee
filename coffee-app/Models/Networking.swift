@@ -1,5 +1,6 @@
 import Foundation
 import Alamofire
+import AlamofireImage
 import SwiftyJSON
 
 class Networking {
@@ -36,14 +37,42 @@ class Networking {
         var locations: [Address] = []
         AF.request("http://localhost:8000/api/cafe/", method: .get).responseDecodable(of: [Cafe].self) { response in
           
-            guard let resp = response.value else {
+            guard let response = response.value else {
                 return completion(nil, response.error)
             }
             
-            resp.forEach { cafe in
+            response.forEach { cafe in
                 locations.append(Address(title: cafe.address!, absolute_url: cafe.get_absolute_url!))
             }
             completion(locations, nil)
+        }
+    }
+    
+    func getAvailableCoffee (cafe: String, completion: @escaping ([CoffeeModel]?, AFError?) -> Void) {
+        var coffeeArray: [CoffeeModel] = []
+        AF.request("http://localhost:8000/api/cafe" + cafe, method: .get).responseDecodable(of: Cafe.self) { response in
+            guard let response = response.value?.coffee else {
+                return completion(nil, response.error)
+            }
+            
+            response.forEach { coffee in
+                coffeeArray.append(CoffeeModel(title: coffee.name!,
+                                               description: coffee.description!,
+                                               image: coffee.image!,
+                                               price: coffee.price!))
+            }
+        
+            completion(coffeeArray, nil)
+        }
+    }
+    
+    func getImage (url: String, completion: @escaping (Data?, AFError?) -> Void) {
+        AF.request(url, method: .get).responseImage { response in
+            guard let image = response.data else {
+                return completion(nil, response.error)
+            }
+            
+            completion(image, nil)
         }
     }
 }
@@ -72,7 +101,7 @@ extension Networking {
         let auth_token: String
     }
     
-    struct Cafe: Decodable {
+    private struct Cafe: Decodable {
         let id: Int
         let address: String?
         let coffee: [Coffee]?
@@ -80,12 +109,12 @@ extension Networking {
         let get_absolute_url: String?
     }
     
-    struct Coffee: Decodable {
-        let id: Int
-        let name, description: String
-        let price, cafe: Int
-        let get_absolute_url: String
-        let image: String
+    private struct Coffee: Decodable {
+        let id: Int?
+        let name, description: String?
+        let price, cafe: Int?
+        let get_absolute_url: String?
+        let image: String?
         let thumbnail: String?
     }
     struct Order: Codable {

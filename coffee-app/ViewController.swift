@@ -4,33 +4,47 @@ class ViewController: UIViewController {
 
     private var coffeeCollectionView: UICollectionView! = nil
     
-    private var coffeeItemsArray: [Coffee] = {
-        var latte = Coffee(
-            title: "Латте",
-            description: "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток.",
-            image: "caffelatte",
-            price: 330)
-        
-        var cappuccino = Coffee(
-            title: "Капучино",
-            description: "Кофейный напиток итальянской кухни на основе эспрессо с добавлением в него подогретого вспененного молока.",
-            image: "cappuccino",
-            price: 230)
-        
-        var caramelMacchiato = Coffee(
-            title: "Карамельный Маккиато",
-            description: "Пропаренное молоко в сочетании с ванильным сиропом и насыщенным эспрессо.",
-            image: "caramelmacchiato",
-            price: 400)
-        
-        var espressoMint = Coffee(
-            title: "Эспрессо-тоник с мятой",
-            description: "Холодный и бодрящий эспрессо-тоник, идеально сочетающий в себе кофе.",
-            image: "espressomint",
-            price: 300)
-        
-        return [latte, cappuccino, caramelMacchiato, espressoMint]
-    }()
+//    private var coffeeItemsArray: [Coffee] = {
+//        var latte = Coffee(
+//            title: "Латте",
+//            description: "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток.",
+//            image: "caffelatte",
+//            price: 330)
+//
+//        var cappuccino = Coffee(
+//            title: "Капучино",
+//            description: "Кофейный напиток итальянской кухни на основе эспрессо с добавлением в него подогретого вспененного молока.",
+//            image: "cappuccino",
+//            price: 230)
+//
+//        var caramelMacchiato = Coffee(
+//            title: "Карамельный Маккиато",
+//            description: "Пропаренное молоко в сочетании с ванильным сиропом и насыщенным эспрессо.",
+//            image: "caramelmacchiato",
+//    caramel-makkiato
+//            price: 400)
+//
+//        var espressoMint = Coffee(
+//            title: "Эспрессо-тоник с мятой",
+//            description: "Холодный и бодрящий эспрессо-тоник, идеально сочетающий в себе кофе.",
+//            image: "espressomint",
+//            price: 300)
+//
+//        return [latte, cappuccino, caramelMacchiato, espressoMint]
+//    }()
+    
+    var coffee = [Coffee]()
+    
+    private func getCoffee() {
+        if let defaultLocationUrl = UserDefaults.standard.string(forKey: "defaultLocationUrl") {
+            Networking.sharedInstance.getAvailableCoffee(cafe: defaultLocationUrl) { coffee, error in
+                guard let coffee = coffee else {
+                    return print("error: \(error!)")
+                }
+                debugPrint(coffee)
+            }
+        }
+    }
     
     private let exitButton: UIButton = {
         let button = UIButton()
@@ -66,18 +80,30 @@ class ViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         view.backgroundColor = .white
         navigationItem.backButtonTitle = ""
-        configureCollectionView()
-        setupViews()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if let defaultTitle = UserDefaults.standard.string(forKey: "defaultLocation") {
             updateTitle(title: defaultTitle)
-            print(UserDefaults.standard.string(forKey: "defaultLocationUrl"))
         }
+            if let savedLocation = UserDefaults.standard.string(forKey: "defaultLocationUrl") {
+                Networking.sharedInstance.getAvailableCoffee(cafe: savedLocation) { coffee, error in
+                    guard let coffee = coffee else {
+                        return print("error: \(error!)")
+                    }
+                    
+                    self.coffee = coffee
+                    print(self.coffee)
+                    
+                    DispatchQueue.main.async {
+                        self.configureCollectionView()
+                        self.setupViews()
+                    }
+                }
+            }
     }
         
     func updateTitle(title: String) {
@@ -154,7 +180,7 @@ extension ViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
                                                heightDimension: .fractionalHeight(1.0))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                       leading: padding,
                                                       bottom: 0,
@@ -168,12 +194,12 @@ extension ViewController {
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.pushController(controller: CoffeeDetailViewController(item: coffeeItemsArray[indexPath.row]))
+        self.pushController(controller: CoffeeDetailViewController(coffee: coffee[indexPath.row]))
     }
 }
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return coffeeItemsArray.count
+        return self.coffee.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -182,7 +208,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CoffeeCell.reuseId, for: indexPath) as! CoffeeCell
-        let coffeeItem = coffeeItemsArray[indexPath.row]
+        let coffeeItem = self.coffee[indexPath.row]
         cell.setup(with: coffeeItem)
         
         return cell

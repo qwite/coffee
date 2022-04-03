@@ -83,6 +83,7 @@ class CoffeeCell: UICollectionViewCell {
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
         descriptionLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20),
         descriptionLabel.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -20),
+        priceLabel.widthAnchor.constraint(equalToConstant: frame.width),
         priceLabel.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -40),
         priceLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20),
         arrowImage.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor),
@@ -93,11 +94,19 @@ class CoffeeCell: UICollectionViewCell {
     }
     
     func setup(with coffee: Coffee) {
-        coffeeImage.image = UIImage(named: coffee.image)
-        titleLabel.text = coffee.title
-        descriptionLabel.text = coffee.description
-        priceLabel.text = "\(coffee.price) ₽"
-    }
+        Networking.sharedInstance.getImage(url: coffee.image) { image, error in
+            guard let image = image else {
+                return print("error: \(error!)")
+            }
+            
+            DispatchQueue.main.async {
+                self.coffeeImage.image = UIImage(data: image)
+                self.titleLabel.text = coffee.title
+                self.descriptionLabel.text = coffee.description
+                self.priceLabel.text = "\(coffee.price) ₽"
+            }
+        }
+      }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

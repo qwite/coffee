@@ -2,10 +2,10 @@ import UIKit
 
 class CoffeeDetailViewController: UIViewController {
     
-    private let item: Coffee
+    private let coffee: Coffee
     
-    init(item: Coffee) {
-        self.item = item
+    init(coffee: Coffee) {
+        self.coffee = coffee
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -86,7 +86,7 @@ class CoffeeDetailViewController: UIViewController {
     let addToOrderButton: UIButton = {
         let button = UIButton()
         
-        button.setTitle("Оформить заказ", for: .normal)
+        button.setTitle("Добавить в заказ", for: .normal)
         button.backgroundColor = .clear
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
@@ -124,11 +124,19 @@ class CoffeeDetailViewController: UIViewController {
     }
     
     func setupViews () {
-        
-        coffeeImage.image = UIImage(named: item.image)
-        titleLabel.text = item.title
-        descriptionLabel.text = item.description
-        priceLabel.text = "\(item.price) ₽"
+        Networking.sharedInstance.getImage(url: self.coffee.image) { image, error in
+            guard let image = image else {
+                return print("error: \(error!)")
+            }
+            
+            DispatchQueue.main.async {
+                self.coffeeImage.image = UIImage(data: image)
+                self.titleLabel.text = self.coffee.title
+                self.descriptionLabel.text = self.coffee.description
+                self.priceLabel.text = "\(self.coffee.price) ₽"
+            }
+        }
+
         
         
         view.addSubview(coffeeImage)

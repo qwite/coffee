@@ -1,6 +1,6 @@
 import UIKit
 
-class CoffeeDetailViewController: UIViewController {
+class DetailViewController: UIViewController {
     
     private let coffee: Coffee
     
@@ -93,11 +93,22 @@ class CoffeeDetailViewController: UIViewController {
         button.layer.borderColor = UIColor.black.cgColor
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-
+        
+        button.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
         button.layer.masksToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    @objc func addToCart() {
+        let item = Coffee(title: coffee.title,
+                          description: coffee.description,
+                          image: coffee.image,
+                          price: coffee.price,
+                          quantity: Int(stepper.value), size: segmentControl.titleForSegment(at: segmentControl.selectedSegmentIndex))
+        Cart.sharedInstance.add(item: item)
+        print(Cart.sharedInstance.items)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

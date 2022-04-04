@@ -16,15 +16,16 @@
 		1F2D13FB27DD1D49006FECC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D13FA27DD1D49006FECC5 /* Assets.xcassets */; };
 		1F2D13FE27DD1D49006FECC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D13FC27DD1D49006FECC5 /* LaunchScreen.storyboard */; };
 		1F2D140627DD280A006FECC5 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D140527DD280A006FECC5 /* UIElements.swift */; };
-		1F421BF627E8E47A009C2D0B /* CoffeeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F421BF527E8E47A009C2D0B /* CoffeeDetailViewController.swift */; };
+		1F421BF627E8E47A009C2D0B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F421BF527E8E47A009C2D0B /* DetailViewController.swift */; };
 		1F97FC6027F074470043A606 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97FC5F27F074470043A606 /* LocationViewController.swift */; };
 		1F97FC6427F079520043A606 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97FC6327F079520043A606 /* AddressCell.swift */; };
+		1F9E012527FA236900898672 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9E012427FA236900898672 /* OrderCell.swift */; };
+		1FB5528C27FB8A550021CCAC /* FooterSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5528B27FB8A550021CCAC /* FooterSupplementaryView.swift */; };
 		1FB670D227F5D6C800A58F3A /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB670D127F5D6C800A58F3A /* Networking.swift */; };
 		1FB670D427F5E71D00A58F3A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB670D327F5E71D00A58F3A /* RegisterViewController.swift */; };
 		1FD07BA527E4D4D000E92A3A /* Coffee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD07BA427E4D4D000E92A3A /* Coffee.swift */; };
-		1FDE544027EF77C40024DC30 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE543F27EF77C40024DC30 /* OrderModel.swift */; };
-		1FDE544327EF84400024DC30 /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE544227EF84400024DC30 /* BasketViewController.swift */; };
-		1FDE544A27EF85C10024DC30 /* BasketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE544927EF85C10024DC30 /* BasketCell.swift */; };
+		1FDE544027EF77C40024DC30 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE543F27EF77C40024DC30 /* Cart.swift */; };
+		1FDE544327EF84400024DC30 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE544227EF84400024DC30 /* CartViewController.swift */; };
 		210439FC2CD86A044F3C2763 /* Pods_coffee_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C4034693CF929462E200E4 /* Pods_coffee_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,15 +42,16 @@
 		1F2D13FD27DD1D49006FECC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F2D13FF27DD1D49006FECC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F2D140527DD280A006FECC5 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
-		1F421BF527E8E47A009C2D0B /* CoffeeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailViewController.swift; sourceTree = "<group>"; };
+		1F421BF527E8E47A009C2D0B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1F97FC5F27F074470043A606 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		1F97FC6327F079520043A606 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
+		1F9E012427FA236900898672 /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
+		1FB5528B27FB8A550021CCAC /* FooterSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterSupplementaryView.swift; sourceTree = "<group>"; };
 		1FB670D127F5D6C800A58F3A /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		1FB670D327F5E71D00A58F3A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		1FD07BA427E4D4D000E92A3A /* Coffee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffee.swift; sourceTree = "<group>"; };
-		1FDE543F27EF77C40024DC30 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
-		1FDE544227EF84400024DC30 /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
-		1FDE544927EF85C10024DC30 /* BasketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketCell.swift; sourceTree = "<group>"; };
+		1FDE543F27EF77C40024DC30 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		1FDE544227EF84400024DC30 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		D3C4034693CF929462E200E4 /* Pods_coffee_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_coffee_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA25D716E799AD545A9E6F88 /* Pods-coffee-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffee-app.debug.xcconfig"; path = "Target Support Files/Pods-coffee-app/Pods-coffee-app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,17 +89,16 @@
 		1F2D13F027DD1D48006FECC5 /* coffee-app */ = {
 			isa = PBXGroup;
 			children = (
+				1F9E012327FA031C00898672 /* Application */,
 				1FDE544827EF84C90024DC30 /* Cells */,
 				1FDE544127EF77D30024DC30 /* Models */,
-				1F2D13F127DD1D48006FECC5 /* AppDelegate.swift */,
-				1F2D13F327DD1D48006FECC5 /* SceneDelegate.swift */,
-				1F2D13F527DD1D48006FECC5 /* ViewController.swift */,
 				1F2D13FA27DD1D49006FECC5 /* Assets.xcassets */,
 				1F2D13FC27DD1D49006FECC5 /* LaunchScreen.storyboard */,
 				1F2D13FF27DD1D49006FECC5 /* Info.plist */,
 				1F2D140527DD280A006FECC5 /* UIElements.swift */,
-				1F421BF527E8E47A009C2D0B /* CoffeeDetailViewController.swift */,
-				1FDE544227EF84400024DC30 /* BasketViewController.swift */,
+				1F2D13F527DD1D48006FECC5 /* ViewController.swift */,
+				1F421BF527E8E47A009C2D0B /* DetailViewController.swift */,
+				1FDE544227EF84400024DC30 /* CartViewController.swift */,
 				1F97FC5F27F074470043A606 /* LocationViewController.swift */,
 				1F17611727F4CDF200C8E298 /* LoginViewController.swift */,
 				1FB670D327F5E71D00A58F3A /* RegisterViewController.swift */,
@@ -105,11 +106,20 @@
 			path = "coffee-app";
 			sourceTree = "<group>";
 		};
+		1F9E012327FA031C00898672 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				1F2D13F127DD1D48006FECC5 /* AppDelegate.swift */,
+				1F2D13F327DD1D48006FECC5 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		1FDE544127EF77D30024DC30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1FD07BA427E4D4D000E92A3A /* Coffee.swift */,
-				1FDE543F27EF77C40024DC30 /* OrderModel.swift */,
+				1FDE543F27EF77C40024DC30 /* Cart.swift */,
 				1F17611927F4E3F500C8E298 /* Address.swift */,
 				1FB670D127F5D6C800A58F3A /* Networking.swift */,
 			);
@@ -120,8 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				1F0E8AF627DE83CB006BE458 /* CoffeeCell.swift */,
-				1FDE544927EF85C10024DC30 /* BasketCell.swift */,
 				1F97FC6327F079520043A606 /* AddressCell.swift */,
+				1F9E012427FA236900898672 /* OrderCell.swift */,
+				1FB5528B27FB8A550021CCAC /* FooterSupplementaryView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -257,11 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FDE544327EF84400024DC30 /* BasketViewController.swift in Sources */,
-				1FDE544A27EF85C10024DC30 /* BasketCell.swift in Sources */,
+				1FDE544327EF84400024DC30 /* CartViewController.swift in Sources */,
 				1FD07BA527E4D4D000E92A3A /* Coffee.swift in Sources */,
-				1FDE544027EF77C40024DC30 /* OrderModel.swift in Sources */,
-				1F421BF627E8E47A009C2D0B /* CoffeeDetailViewController.swift in Sources */,
+				1FDE544027EF77C40024DC30 /* Cart.swift in Sources */,
+				1FB5528C27FB8A550021CCAC /* FooterSupplementaryView.swift in Sources */,
+				1F421BF627E8E47A009C2D0B /* DetailViewController.swift in Sources */,
+				1F9E012527FA236900898672 /* OrderCell.swift in Sources */,
 				1F2D13F627DD1D48006FECC5 /* ViewController.swift in Sources */,
 				1FB670D227F5D6C800A58F3A /* Networking.swift in Sources */,
 				1F17611A27F4E3F500C8E298 /* Address.swift in Sources */,

@@ -6,6 +6,8 @@ import SwiftyJSON
 class Networking {
     static let sharedInstance = Networking()
     
+    private init () {}
+    
     func loginRequest(phone: String, password: String, completion: @escaping (String?, AFError?) -> Void) {
         let loginData = Login(phone_number: phone, password: password)
         

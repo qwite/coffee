@@ -2,6 +2,17 @@ import Alamofire
 import Foundation
 
 class LoginViewController: UIViewController {
+    private let welcomeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Заказать кофе. \nЗдесь. \nСейчас"
+        label.font = UIFont.systemFont(ofSize: 46,
+                                       weight: .bold)
+        label.numberOfLines = 0
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let loginButton: UIButton = {
         let button = UIButton()
         let lineView = UIView()
@@ -74,26 +85,32 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        setupViews()
+    }
+    
+    private func setupViews() {
         view.backgroundColor = .white
-        view.addSubview(phoneField)
-        view.addSubview(passwordField)
-        view.addSubview(loginButton)
-        view.addSubview(registerButton)
+        view.addSubview(welcomeLabel)
+        
+        let stackView = UIStackView(arrangedSubviews: [phoneField,
+                                                       passwordField,
+                                                       loginButton
+                                                   ])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        
+        view.addSubview(stackView)
+        
         NSLayoutConstraint.activate([
-            phoneField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            phoneField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            phoneField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            phoneField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            passwordField.topAnchor.constraint(equalTo: phoneField.bottomAnchor, constant: 10),
-            passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            passwordField.leftAnchor.constraint(equalTo: phoneField.leftAnchor),
-            passwordField.rightAnchor.constraint(equalTo: phoneField.rightAnchor),
-            loginButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 20),
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.widthAnchor.constraint(equalToConstant: 200),
-            loginButton.heightAnchor.constraint(equalToConstant: 42),
-            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10),
-            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            welcomeLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
+            stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 20),
+            stackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            stackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+//            loginButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+//            loginButton.widthAnchor.constraint(equalTo: view.widthAnchor),
+            loginButton.heightAnchor.constraint(equalToConstant: 42)
         ])
     }
 }

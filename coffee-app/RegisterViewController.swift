@@ -69,7 +69,7 @@ class RegisterViewController: UIViewController {
         setupViews()
     }
     
-    func setupViews() {
+    private func setupViews() {
         let stackView = UIStackView(arrangedSubviews: [nameField,
                                                       phoneField,
                                                       passwordField

@@ -4,47 +4,7 @@ class ViewController: UIViewController {
 
     private var coffeeCollectionView: UICollectionView! = nil
     
-//    private var coffeeItemsArray: [Coffee] = {
-//        var latte = Coffee(
-//            title: "Латте",
-//            description: "Нежное пропаренное молоко, богатый вкус эспрессо и тонкий слой молочной пены, завершающий напиток.",
-//            image: "caffelatte",
-//            price: 330)
-//
-//        var cappuccino = Coffee(
-//            title: "Капучино",
-//            description: "Кофейный напиток итальянской кухни на основе эспрессо с добавлением в него подогретого вспененного молока.",
-//            image: "cappuccino",
-//            price: 230)
-//
-//        var caramelMacchiato = Coffee(
-//            title: "Карамельный Маккиато",
-//            description: "Пропаренное молоко в сочетании с ванильным сиропом и насыщенным эспрессо.",
-//            image: "caramelmacchiato",
-//    caramel-makkiato
-//            price: 400)
-//
-//        var espressoMint = Coffee(
-//            title: "Эспрессо-тоник с мятой",
-//            description: "Холодный и бодрящий эспрессо-тоник, идеально сочетающий в себе кофе.",
-//            image: "espressomint",
-//            price: 300)
-//
-//        return [latte, cappuccino, caramelMacchiato, espressoMint]
-//    }()
-    
     var coffee = [Coffee]()
-    
-    private func getCoffee() {
-        if let defaultLocationUrl = UserDefaults.standard.string(forKey: "defaultLocationUrl") {
-            Networking.sharedInstance.getAvailableCoffee(cafe: defaultLocationUrl) { coffee, error in
-                guard let coffee = coffee else {
-                    return print("error: \(error!)")
-                }
-                debugPrint(coffee)
-            }
-        }
-    }
     
     private let exitButton: UIButton = {
         let button = UIButton()
@@ -82,7 +42,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.backButtonTitle = ""
-        
+//        Order.sharedInstance.addItem(coffee: Coffee(title: "test", description: "test", image: "", price: 100))
+//        Order.sharedInstance.addItem(coffee: Coffee(title: "dsfkdfskfds", description: "test", image: "", price: 100))
+//        Order.sharedInstance.addItem(coffee: Coffee(title: "lettto", description: "test", image: "", price: 100))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,7 +89,7 @@ class ViewController: UIViewController {
     }
     
     @objc func makeOrder () {
-        navigationController?.pushViewController(LocationViewController(), animated: true)
+        navigationController?.pushViewController(CartViewController(), animated: true)
     }
     @objc func didTapNavBar() {
         navigationController?.pushViewController(LocationViewController(), animated: true)
@@ -179,7 +141,7 @@ extension ViewController {
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                               heightDimension: .fractionalHeight(1.0))
+                                               heightDimension: .fractionalHeight(0.9))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                       leading: padding,
@@ -194,7 +156,7 @@ extension ViewController {
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.pushController(controller: CoffeeDetailViewController(coffee: coffee[indexPath.row]))
+        self.pushController(controller: DetailViewController(coffee: coffee[indexPath.row]))
     }
 }
 extension ViewController: UICollectionViewDataSource {

@@ -17,4 +17,10 @@ struct Cart {
     mutating func add(item: Coffee) {
         items.append(item)
     }
+    
+//    mutating func remove(id: Int) {
+//        items.firstIndex { coffee in
+//            coffee.id == id
+//        }
+//    }
 }

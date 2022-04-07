@@ -1,4 +1,5 @@
 import UIKit
+import SPAlert
 
 class DetailViewController: UIViewController {
     
@@ -83,7 +84,7 @@ class DetailViewController: UIViewController {
         return segmentControl
     }()
     
-    let addToOrderButton: UIButton = {
+    private let addToOrderButton: UIButton = {
         let button = UIButton()
         
         button.setTitle("Добавить в заказ", for: .normal)
@@ -101,13 +102,30 @@ class DetailViewController: UIViewController {
     }()
     
     @objc func addToCart() {
-        let item = Coffee(title: coffee.title,
+        var size: String?
+        
+        switch segmentControl.titleForSegment(at: segmentControl.selectedSegmentIndex) {
+        case "Small":
+            size = "S"
+        case "Medium":
+            size = "M"
+        case "Large":
+            size = "L"
+        default:
+            size = "S"
+        }
+        
+        let item = Coffee(id: coffee.id,
+                          title: coffee.title,
                           description: coffee.description,
                           image: coffee.image,
                           price: coffee.price,
-                          quantity: Int(stepper.value), size: segmentControl.titleForSegment(at: segmentControl.selectedSegmentIndex))
+                          quantity: Int(stepper.value),
+                          size: size)
+        
         Cart.sharedInstance.add(item: item)
-        print(Cart.sharedInstance.items)
+        SPAlert.present(title: "Добавлено в корзину", preset: .done)
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
@@ -120,11 +138,6 @@ class DetailViewController: UIViewController {
         
         setupViews()
 
-    }
-    
-    
-    @objc func popVC () {
-        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func stepperValueChanged (_ sender: UIStepper!) {
@@ -147,8 +160,6 @@ class DetailViewController: UIViewController {
                 self.priceLabel.text = "\(self.coffee.price) ₽"
             }
         }
-
-        
         
         view.addSubview(coffeeImage)
         view.addSubview(titleLabel)
@@ -188,8 +199,5 @@ class DetailViewController: UIViewController {
         
         NSLayoutConstraint.activate(layots)
     }
-    
-
 
 }
-

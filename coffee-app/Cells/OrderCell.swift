@@ -18,8 +18,7 @@ class OrderCell: UICollectionViewCell {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
  
-        
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -48,6 +47,14 @@ class OrderCell: UICollectionViewCell {
         return label
     }()
     
+    private let trashImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "trash"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = .black
+        
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -69,16 +76,18 @@ class OrderCell: UICollectionViewCell {
                 
         addSubview(coffeeImage)
         addSubview(hStack)
-        
+        addSubview(trashImage)
         
         let layouts: [NSLayoutConstraint] = [
-            coffeeImage.heightAnchor.constraint(equalTo: heightAnchor),
             coffeeImage.leftAnchor.constraint(equalTo: leftAnchor),
-            coffeeImage.widthAnchor.constraint(equalToConstant: frame.width / 3),
+            coffeeImage.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            coffeeImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            coffeeImage.widthAnchor.constraint(equalToConstant: frame.width / 2.5),
             hStack.centerYAnchor.constraint(equalTo: centerYAnchor),
             hStack.leftAnchor.constraint(equalTo: coffeeImage.rightAnchor, constant: 20),
             hStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
-
+            trashImage.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+            trashImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ]
         
         NSLayoutConstraint.activate(layouts)
@@ -91,11 +100,11 @@ class OrderCell: UICollectionViewCell {
              }
              
              DispatchQueue.main.async {
-             self.coffeeImage.image = UIImage(data: data)
-             self.nameLabel.text = coffee.title
-             self.quantityLabel.text = "Количество: \(coffee.quantity!)"
-             self.sizeLabel.text = "Размер: \(coffee.size!)"
-             self.priceLabel.text = "\(coffee.price) ₽"
+                 self.coffeeImage.image = UIImage(data: data)
+                 self.nameLabel.text = coffee.title
+                 self.quantityLabel.text = "Количество: \(coffee.quantity!)"
+                 self.sizeLabel.text = "Размер: \(coffee.size!)"
+                 self.priceLabel.text = "\(coffee.price) ₽"
              }
          }
     }

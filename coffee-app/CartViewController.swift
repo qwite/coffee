@@ -3,7 +3,6 @@ import UIKit
 class CartViewController: UIViewController {
 
     private var cartCollectionView: UICollectionView! = nil
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,13 +17,11 @@ class CartViewController: UIViewController {
         cartCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(cartCollectionView)
 
-//        cartCollectionView.frame = view.frame
-
         let layouts: [NSLayoutConstraint] = [
             cartCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             cartCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             cartCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            cartCollectionView.heightAnchor.constraint(equalToConstant: view.frame.height),
+            cartCollectionView.heightAnchor.constraint(equalToConstant: view.frame.height)
         ]
         
         NSLayoutConstraint.activate(layouts)
@@ -62,14 +59,13 @@ extension CartViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createFooter()]
         let layout = UICollectionViewCompositionalLayout(section: section)
-        
 
         return layout
     }
     
     func createFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                          heightDimension: .estimated(44))
+                                          heightDimension: .fractionalWidth(1.0))
         let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: size,
                                                                  elementKind: "footer",
                                                                  alignment: .bottom)
@@ -82,13 +78,27 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         return Cart.sharedInstance.items.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: "footer", withReuseIdentifier: "FooterSupplementaryView", for: indexPath) as! FooterSupplementaryView
-            return footerView
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        guard let footerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: "footer", withReuseIdentifier: FooterSupplementaryView.reuseId, for: indexPath)
+                as? FooterSupplementaryView else {
+             fatalError("error with dequeue reuse footer")
         }
+        
+        return footerView
+    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderCell.reuseId, for: indexPath) as! OrderCell
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: OrderCell.reuseId, for: indexPath) as? OrderCell else {
+            fatalError("dequeueReusableCell fatal error with OrderCell")
+        }
+        
         let orderItem = Cart.sharedInstance.items[indexPath.row]
         cell.setup(with: orderItem)
         return cell

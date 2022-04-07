@@ -15,7 +15,7 @@
 		1F2D13F627DD1D48006FECC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D13F527DD1D48006FECC5 /* ViewController.swift */; };
 		1F2D13FB27DD1D49006FECC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D13FA27DD1D49006FECC5 /* Assets.xcassets */; };
 		1F2D13FE27DD1D49006FECC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D13FC27DD1D49006FECC5 /* LaunchScreen.storyboard */; };
-		1F2D140627DD280A006FECC5 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D140527DD280A006FECC5 /* UIElements.swift */; };
+		1F2D140627DD280A006FECC5 /* CoffeeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D140527DD280A006FECC5 /* CoffeeDelegate.swift */; };
 		1F421BF627E8E47A009C2D0B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F421BF527E8E47A009C2D0B /* DetailViewController.swift */; };
 		1F97FC6027F074470043A606 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97FC5F27F074470043A606 /* LocationViewController.swift */; };
 		1F97FC6427F079520043A606 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97FC6327F079520043A606 /* AddressCell.swift */; };
@@ -41,7 +41,7 @@
 		1F2D13FA27DD1D49006FECC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F2D13FD27DD1D49006FECC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F2D13FF27DD1D49006FECC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F2D140527DD280A006FECC5 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
+		1F2D140527DD280A006FECC5 /* CoffeeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDelegate.swift; sourceTree = "<group>"; };
 		1F421BF527E8E47A009C2D0B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1F97FC5F27F074470043A606 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		1F97FC6327F079520043A606 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
@@ -95,7 +95,6 @@
 				1F2D13FA27DD1D49006FECC5 /* Assets.xcassets */,
 				1F2D13FC27DD1D49006FECC5 /* LaunchScreen.storyboard */,
 				1F2D13FF27DD1D49006FECC5 /* Info.plist */,
-				1F2D140527DD280A006FECC5 /* UIElements.swift */,
 				1F2D13F527DD1D48006FECC5 /* ViewController.swift */,
 				1F421BF527E8E47A009C2D0B /* DetailViewController.swift */,
 				1FDE544227EF84400024DC30 /* CartViewController.swift */,
@@ -111,6 +110,7 @@
 			children = (
 				1F2D13F127DD1D48006FECC5 /* AppDelegate.swift */,
 				1F2D13F327DD1D48006FECC5 /* SceneDelegate.swift */,
+				1F2D140527DD280A006FECC5 /* CoffeeDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -166,6 +166,7 @@
 				1F2D13EB27DD1D48006FECC5 /* Frameworks */,
 				1F2D13EC27DD1D48006FECC5 /* Resources */,
 				A37693B52BC4619C12E2EA5C /* [CP] Embed Pods Frameworks */,
+				1F5E79D727FEEF4400410E65 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -222,6 +223,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1F5E79D727FEEF4400410E65 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+		};
 		A37693B52BC4619C12E2EA5C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,7 +300,7 @@
 				1F97FC6427F079520043A606 /* AddressCell.swift in Sources */,
 				1FB670D427F5E71D00A58F3A /* RegisterViewController.swift in Sources */,
 				1F0E8AF727DE83CB006BE458 /* CoffeeCell.swift in Sources */,
-				1F2D140627DD280A006FECC5 /* UIElements.swift in Sources */,
+				1F2D140627DD280A006FECC5 /* CoffeeDelegate.swift in Sources */,
 				1F17611827F4CDF200C8E298 /* LoginViewController.swift in Sources */,
 				1F2D13F427DD1D48006FECC5 /* SceneDelegate.swift in Sources */,
 			);

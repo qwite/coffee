@@ -1,11 +1,13 @@
 import Foundation
 
 struct Address: Hashable {
+    let id: Int
     let title: String
-    let absolute_url: String
+    let absoluteUrl: String
     
-    init(title: String, absolute_url: String) {
+    init(id: Int, title: String, absoluteUrl: String) {
+        self.id = id
         self.title = title
-        self.absolute_url = absolute_url
+        self.absoluteUrl = absoluteUrl
     }
 }

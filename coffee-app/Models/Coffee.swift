@@ -3,6 +3,7 @@ import Foundation
 typealias CoffeeModel = Coffee
 
 struct Coffee {
+    let id: Int
     let title: String
     let description: String
     let image: String
@@ -10,7 +11,9 @@ struct Coffee {
     let quantity: Int?
     let size: String?
     
-    init(title: String, description: String, image: String, price: Int, quantity: Int? = 1, size: String? = "S") {
+    init(id: Int, title: String, description: String, image: String, price: Int, quantity: Int? = 1,
+         size: String? = "S") {
+        self.id = id
         self.title = title
         self.description = description
         self.image = image

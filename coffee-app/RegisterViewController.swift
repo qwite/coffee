@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SPAlert
 
 class RegisterViewController: UIViewController {
     private let nameField: UITextField = {
@@ -29,7 +30,6 @@ class RegisterViewController: UIViewController {
     
     private let registerButton: UIButton = {
         let button = UIButton()
-        let lineView = UIView()
         button.setTitle("Регистрация", for: .normal)
         button.backgroundColor = .clear
         button.layer.cornerRadius = 10
@@ -47,47 +47,36 @@ class RegisterViewController: UIViewController {
     @objc func registerButtonPressed() {
         Networking.sharedInstance.registerRequest(name: nameField.text!, phone: phoneField.text!, password: passwordField.text!) { name, error in
             guard let name = name else {
-                let errorAlert = UIAlertController(title: "Error", message: "\(error!)", preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-                    // ok action
-                }))
-                debugPrint(error!)
-                return self.present(errorAlert, animated: true, completion: nil)
+                return SPAlert.present(title: "Ошибка", message: "Возникла ошибка: \(error!)", preset: .error)
             }
             
-            let successAlert = UIAlertController(title: "Отлично!", message: "\(name), вы успешно зарегистрированы!", preferredStyle: .alert)
-            successAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            self.present(successAlert, animated: true, completion: nil)
-
+            SPAlert.present(title: "Отлично!", message: "\(name), вы успешно зарегистрировались!", preset: .done)
         }
     }
     
     override func viewDidLoad() {
         view.backgroundColor = .white
+       
         setupViews()
     }
     
     private func setupViews() {
         let stackView = UIStackView(arrangedSubviews: [nameField,
                                                       phoneField,
-                                                      passwordField
+                                                      passwordField, registerButton
                                                       ])
-        stackView.spacing = 10
-        stackView.alignment = .leading
+        stackView.spacing = 15
         stackView.axis = .vertical
+        
         view.addSubview(stackView)
-        view.addSubview(registerButton)
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         let layout: [NSLayoutConstraint] = [
-            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            passwordField.widthAnchor.constraint(equalTo: view.widthAnchor),
-            registerButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
-            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            registerButton.widthAnchor.constraint(equalToConstant: 200),
+            stackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            stackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            stackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+
             registerButton.heightAnchor.constraint(equalToConstant: 42)
         ]
         

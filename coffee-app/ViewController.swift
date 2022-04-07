@@ -1,4 +1,5 @@
 import UIKit
+import SPAlert
 
 class ViewController: UIViewController {
 
@@ -34,31 +35,30 @@ class ViewController: UIViewController {
 
         button.layer.masksToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(makeOrder), for: .touchUpInside)
+        button.addTarget(self, action: #selector(makeOrderButtonPressed), for: .touchUpInside)
         return button
     }()
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserDefaults.standard.set(false, forKey: "isAuthenticated")
         view.backgroundColor = .white
         navigationItem.backButtonTitle = ""
-//        Order.sharedInstance.addItem(coffee: Coffee(title: "test", description: "test", image: "", price: 100))
-//        Order.sharedInstance.addItem(coffee: Coffee(title: "dsfkdfskfds", description: "test", image: "", price: 100))
-//        Order.sharedInstance.addItem(coffee: Coffee(title: "lettto", description: "test", image: "", price: 100))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if let defaultTitle = UserDefaults.standard.string(forKey: "defaultLocation") {
             updateTitle(title: defaultTitle)
         }
+        
             if let savedLocation = UserDefaults.standard.string(forKey: "defaultLocationUrl") {
                 Networking.sharedInstance.getAvailableCoffee(cafe: savedLocation) { coffee, error in
                     guard let coffee = coffee else {
-                        return print("error: \(error!)")
+                        return SPAlert.present(message: "Отсутствует подключение к интернету", haptic: .error)
                     }
                     
                     self.coffee = coffee
-                    print(self.coffee)
                     
                     DispatchQueue.main.async {
                         self.configureCollectionView()
@@ -67,7 +67,8 @@ class ViewController: UIViewController {
                 }
             }
     }
-        
+    
+    // MARK: Updating location title
     func updateTitle(title: String) {
         self.title = title
         
@@ -88,12 +89,18 @@ class ViewController: UIViewController {
         navigationItem.titleView = hStack
     }
     
-    @objc func makeOrder () {
-        navigationController?.pushViewController(CartViewController(), animated: true)
+    @objc func makeOrderButtonPressed () {
+        if (!Cart.sharedInstance.items.isEmpty) {
+            navigationController?.pushViewController(CartViewController(), animated: true)
+        } else {
+            SPAlert.present(message: "Добавьте товар в корзину", haptic: .error)
+        }
+        
     }
     @objc func didTapNavBar() {
         navigationController?.pushViewController(LocationViewController(), animated: true)
     }
+    
     func setupViews() {
         
         view.addSubview(exitButton)
@@ -169,12 +176,14 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CoffeeCell.reuseId, for: indexPath) as! CoffeeCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CoffeeCell.reuseId,
+                                                            for: indexPath) as? CoffeeCell else {
+            fatalError("error with dequeue reuse cell")
+        }
+        
         let coffeeItem = self.coffee[indexPath.row]
         cell.setup(with: coffeeItem)
         
         return cell
     }
-    
 }
-

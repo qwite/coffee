@@ -45,7 +45,6 @@ class CoffeeCell: UICollectionViewCell {
             image: UIImage(systemName: "arrow.right",
                            withConfiguration: config))
         image.tintColor = .black
-
    
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -83,11 +82,6 @@ class CoffeeCell: UICollectionViewCell {
         arrowImage.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor),
         arrowImage.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
         arrowImage.heightAnchor.constraint(equalTo: priceLabel.heightAnchor)
-//        priceLabel.widthAnchor.constraint(equalToConstant: frame.width),
-//        priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-//        priceLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-//        arrowImage.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor),
-//        arrowImage.rightAnchor.constraint(equalTo: rightAnchor, constant: -20)
         ]
         
         NSLayoutConstraint.activate(layots)

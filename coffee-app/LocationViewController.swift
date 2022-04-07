@@ -1,4 +1,5 @@
 import UIKit
+import SPAlert
 
 class LocationViewController: UIViewController {
 
@@ -6,7 +7,6 @@ class LocationViewController: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, Address>?
 
     var delegate: CoffeeCollectionViewDelegate?
-        
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class LocationViewController: UIViewController {
 }
 
 extension LocationViewController {
-    enum Section{
+    enum Section {
         case main
     }
 }
@@ -44,7 +44,7 @@ extension LocationViewController: UICollectionViewDelegate {
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
-        let registration = UICollectionView.CellRegistration<UICollectionViewListCell, Address> { cell, indexPath, address in
+        let registration = UICollectionView.CellRegistration<UICollectionViewListCell, Address> { cell, _, address in
             var content = cell.defaultContentConfiguration()
             content.text = "\(address.title)"
             
@@ -71,7 +71,7 @@ extension LocationViewController: UICollectionViewDelegate {
         
         Networking.sharedInstance.getLocations { address, error in
             guard let address = address else {
-                return print("error: \(error!)")
+                return SPAlert.present(message: "Отсутствует подключение к интернету", haptic: .error)
             }
             
             DispatchQueue.main.async {
@@ -88,8 +88,10 @@ extension LocationViewController: UICollectionViewDelegate {
             }
             
             let selectedAddress = address[indexPath.row]
-            UserDefaults.standard.set(selectedAddress.absolute_url, forKey: "defaultLocationUrl")
+            UserDefaults.standard.set(selectedAddress.id, forKey: "defaultLocationId")
+            UserDefaults.standard.set(selectedAddress.absoluteUrl, forKey: "defaultLocationUrl")
             UserDefaults.standard.set(selectedAddress.title, forKey: "defaultLocation")
+            
         }
     }
     
